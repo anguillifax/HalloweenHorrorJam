@@ -9,7 +9,10 @@ namespace HHGame.GameScripts
 	{
 		void IHitTarget.Hit(bool doesDamage)
 		{
-			GetComponent<Light2D>().enabled = true;
+			if (doesDamage)
+			{
+				GetComponent<Light2D>().enabled = true;
+			}
 		}
 	}
 }

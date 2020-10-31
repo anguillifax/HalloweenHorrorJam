@@ -409,7 +409,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -685474253
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ce0bf4df8beaa4345a7ff4bb5d37b772, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 9798415300000000337e24d74f365057
+  m_ApplyToSortingLayers: 97984153000000000931b2e3337e24d74f365057
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.1745283, b: 0.67440516, a: 1}
   m_Intensity: 0.4
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 9798415300000000
+  m_ApplyToSortingLayers: 97984153000000000931b2e3
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -1050,61 +1050,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1082650844, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: m_Intensity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3444375150021619657, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumTimer.duration
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[1].time
-      value: 0.004908502
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[2].time
-      value: 0.39376974
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[2].value
-      value: 0.8662134
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[2].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[2].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[2].outWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[3].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[3].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-      propertyPath: attackLumFactor.m_Curve.Array.data[2].tangentMode
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6664742463276867565, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
       propertyPath: m_LocalPosition.x
