@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace HHGame.GameScripts
 {
-	internal class MainMenuScript : MonoBehaviour
+	internal class StartupScript : MonoBehaviour
 	{
 		public LoadSceneTransition transition = default;
 
-		public void Play()
+		private void Start()
 		{
 			ScreenTransition.BeginTransition(transition.LoadWorld);
-		}
-
-		public void Quit()
-		{
-			Application.Quit();
 		}
 	}
 }
