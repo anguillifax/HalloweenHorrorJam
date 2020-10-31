@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - Sonar Blast
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Lights
     uniqueID: 3609493043
+    locked: 0
+  - name: Glow
+    uniqueID: 1464874575
     locked: 0

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace HHGame.GameScripts
 {
@@ -30,6 +31,8 @@ namespace HHGame.GameScripts
 		public SimpleTimer swimChargeTime = default;
 
 		[Header("Attack")]
+		public GameObject attackPrefabBlast = default;
+		public Transform attackMuzzleOrigin = default;
 		public SimpleTimer attackDuration = default;
 		public float attackHit = 0.4f;
 		public AnimationCurve attackCurve = default;
@@ -37,6 +40,9 @@ namespace HHGame.GameScripts
 		public float attackInputAccel = 10;
 		public float attackDecayAccel = 10;
 		public float attackCooldown = 0.4f;
+		public Light2D attackLumLight = default;
+		public AnimationCurve attackLumFactor = default;
+		public SimpleTimer attackLumTimer = default;
 		private Vector2 attackCurDecay;
 		private Vector2 attackCurInput;
 		private Vector2 attackDir;
@@ -58,6 +64,11 @@ namespace HHGame.GameScripts
 		private Vector2 LookDir
 		{
 			get => (mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+		}
+
+		private float LookAngleDeg
+		{
+			get => -Vector2.SignedAngle(LookDir, Vector2.up);
 		}
 
 		private WorldCamera WorldCam
@@ -83,6 +94,7 @@ namespace HHGame.GameScripts
 			body.velocity = Vector2.zero;
 			inputAttackTimestamp = -1000;
 			cooldown.Stop();
+			attackLumTimer.Stop();
 			StateSwimBegin();
 		}
 
@@ -99,6 +111,9 @@ namespace HHGame.GameScripts
 				inputAttackTimestamp = Time.time;
 			}
 			inputAttack = Input.GetButton("Fire1");
+
+			attackLumTimer.Update(Time.deltaTime);
+			attackLumLight.intensity = attackLumFactor.Evaluate(attackLumTimer.NormalizedProgress);
 		}
 
 		// =========================================================
@@ -151,6 +166,8 @@ namespace HHGame.GameScripts
 			attackCurDecay = body.velocity;
 			attackDir = LookDir;
 			WorldCam.TriggerFire();
+			Instantiate(attackPrefabBlast, attackMuzzleOrigin.position, Quaternion.Euler(0, 0, LookAngleDeg));
+			attackLumTimer.Start();
 		}
 
 		private void StateAttack()
@@ -164,7 +181,7 @@ namespace HHGame.GameScripts
 
 			if (attackDuration.ElapsedTime > attackHit)
 			{
-				body.MoveRotation(-Vector2.SignedAngle(LookDir, Vector2.up));
+				body.MoveRotation(LookAngleDeg);
 			}
 
 			if (attackDuration.Done)

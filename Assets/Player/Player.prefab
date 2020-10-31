@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 672961603}
   - component: {fileID: 672961604}
   m_Layer: 10
-  m_Name: Point Light 2D
+  m_Name: Center Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.1
+  m_Intensity: 0.06
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 97984153337e24d7
+  m_ApplyToSortingLayers: 97984153
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -60,6 +60,78 @@ MonoBehaviour:
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.96
   m_PointLightOuterRadius: 1.72
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &864822822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864822823}
+  - component: {fileID: 864822824}
+  m_Layer: 10
+  m_Name: Sonar Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &864822823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864822822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.67, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6664742463276867565}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &864822824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864822822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 0.5235849, g: 1, b: 0.9354014, a: 1}
+  m_Intensity: 0.38
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 97984153
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 158
+  m_PointLightOuterAngle: 207
+  m_PointLightInnerRadius: 0.27
+  m_PointLightOuterRadius: 1
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -83,7 +155,7 @@ GameObject:
   - component: {fileID: 1082650843}
   - component: {fileID: 1082650844}
   m_Layer: 10
-  m_Name: Point Light 2D (2)
+  m_Name: BG Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +173,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6664742463276867565}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1082650844
 MonoBehaviour:
@@ -144,7 +216,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!1 &1839279928
+--- !u!1 &1791058240
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,70 +224,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1839279929}
-  - component: {fileID: 1839279930}
+  - component: {fileID: 1791058241}
   m_Layer: 10
-  m_Name: Point Light 2D (1)
+  m_Name: Muzzle
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1839279929
+--- !u!4 &1791058241
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1839279928}
+  m_GameObject: {fileID: 1791058240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6664742463276867565}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1839279930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1839279928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LightType: 3
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.67
-  m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 337e24d7
-  m_LightCookieSprite: {fileID: 0}
-  m_UseNormalMap: 0
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0
-  m_ShadowVolumeIntensity: 0
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 1.53
-  m_PointLightOuterRadius: 3.73
-  m_PointLightDistance: 3
-  m_PointLightQuality: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &3444375150021619657
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +263,7 @@ GameObject:
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -249,8 +279,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 672961603}
-  - {fileID: 1839279929}
   - {fileID: 1082650843}
+  - {fileID: 864822823}
+  - {fileID: 1791058241}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -359,16 +390,22 @@ MonoBehaviour:
     duration: 1
     elapsed: 0
   swimVel: 2.1
+  swimVelCharge: 1.3
   swimAccel:
     max: 5
     min: 3
     growSpeed: 40
     decaySpeed: 30
     current: 0
+  swimChargeTime:
+    duration: 0.4
+    elapsed: 0
+  attackPrefabBlast: {fileID: 3871109316425888943, guid: 0e85cbef09b4f3446ba736e1448df9fb, type: 3}
+  attackMuzzleOrigin: {fileID: 1791058241}
   attackDuration:
     duration: 1
     elapsed: 0
-  attackHit: 0.4
+  attackHit: 0.1
   attackCurve:
     serializedVersion: 2
     m_Curve:
@@ -382,8 +419,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.22532326
-      value: -0.15215349
+      time: 0.037594378
+      value: -0.0075497627
       inSlope: -2.0063007
       outSlope: -2.0063007
       tangentMode: 0
@@ -391,8 +428,8 @@ MonoBehaviour:
       inWeight: 0.11300352
       outWeight: 1
     - serializedVersion: 3
-      time: 0.35817268
-      value: -10
+      time: 0.16243294
+      value: -13.921875
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -400,8 +437,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.1082195
     - serializedVersion: 3
-      time: 0.6986368
-      value: -1.6647892
+      time: 0.29617095
+      value: -1.3466587
       inSlope: 2.2371373
       outSlope: 2.2371373
       tangentMode: 0
@@ -409,8 +446,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.17256866
     - serializedVersion: 3
-      time: 1
-      value: -0.19760895
+      time: 0.53497314
+      value: -0.41451645
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -420,10 +457,47 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  attackInputVel: 1
+  attackInputVel: 0.3
   attackInputAccel: 10
   attackDecayAccel: 10
-  attackCooldown: 0.1
+  attackCooldown: 0.3
+  attackLumLight: {fileID: 1082650844}
+  attackLumFactor:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.062579095
+      value: 0.80464095
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  attackLumTimer:
+    duration: 1
+    elapsed: 0
 --- !u!114 &7285257110710366751
 MonoBehaviour:
   m_ObjectHideFlags: 0
