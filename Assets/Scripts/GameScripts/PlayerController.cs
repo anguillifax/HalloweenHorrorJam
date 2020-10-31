@@ -44,7 +44,18 @@ namespace HHGame.GameScripts
 		private float inputAttack;
 
 		private Rigidbody2D body;
+		private SpriteRenderer spriteRen;
 		private FrameAnimator animator;
+		private Camera mainCam;
+
+		// =========================================================
+		// Properties
+		// =========================================================
+
+		private Vector2 LookDir
+		{
+			get => (mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+		}
 
 		// =========================================================
 		// Setup
@@ -53,7 +64,9 @@ namespace HHGame.GameScripts
 		private void Awake()
 		{
 			body = GetComponent<Rigidbody2D>();
+			spriteRen = GetComponent<SpriteRenderer>();
 			animator = GetComponent<FrameAnimator>();
+			mainCam = Camera.main;
 		}
 
 		private void Start()
@@ -99,6 +112,8 @@ namespace HHGame.GameScripts
 			Vector2 setpoint = swimVel * inputAxesClamp;
 			body.velocity = Vector2.MoveTowards(body.velocity, setpoint, swimAccel.Current * Time.fixedDeltaTime);
 
+			body.MoveRotation(-Vector2.SignedAngle(LookDir, Vector2.up));
+
 			if (Time.time - inputAttack < 0.1f && cooldown.Done)
 			{
 				StateAttackBegin();
@@ -113,8 +128,7 @@ namespace HHGame.GameScripts
 			attackDuration.Start();
 			attackCurInput = Vector2.zero;
 			attackCurDecay = body.velocity;
-			attackDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-			attackDir.Normalize();
+			attackDir = LookDir;
 		}
 
 		private void StateAttack()
@@ -125,6 +139,11 @@ namespace HHGame.GameScripts
 			attackCurInput = Vector2.MoveTowards(attackCurInput, inputAxesClamp * attackInputVel, attackInputAccel * Time.fixedDeltaTime);
 			Vector2 moveVel = attackCurve.Evaluate(attackDuration.ElapsedTime) * attackDir;
 			body.velocity = attackCurDecay + attackCurInput + moveVel;
+
+			if (attackDuration.ElapsedTime > attackHit)
+			{
+				body.MoveRotation(-Vector2.SignedAngle(LookDir, Vector2.up));
+			}
 
 			if (attackDuration.Done)
 			{

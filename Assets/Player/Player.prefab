@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &3869268907257294600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,8 +172,8 @@ MonoBehaviour:
       inWeight: 0.11300352
       outWeight: 1
     - serializedVersion: 3
-      time: 0.34254768
-      value: -3.2996826
+      time: 0.35817268
+      value: -10
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -201,10 +201,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  attackInputVel: 2
+  attackInputVel: 1
   attackInputAccel: 10
   attackDecayAccel: 10
-  attackCooldown: 0.4
+  attackCooldown: 0.1
 --- !u!114 &7285257110710366751
 MonoBehaviour:
   m_ObjectHideFlags: 0
