@@ -25,7 +25,9 @@ namespace HHGame.GameScripts
 
 		[Header("Swim")]
 		public float swimVel = 8;
+		public float swimVelCharge = 4;
 		public RampedValue swimAccel = default;
+		public SimpleTimer swimChargeTime = default;
 
 		[Header("Attack")]
 		public SimpleTimer attackDuration = default;
@@ -41,7 +43,8 @@ namespace HHGame.GameScripts
 
 		private Vector2 inputAxes;
 		private Vector2 inputAxesClamp;
-		private float inputAttack;
+		private float inputAttackTimestamp;
+		private bool inputAttack;
 
 		private Rigidbody2D body;
 		private SpriteRenderer spriteRen;
@@ -55,6 +58,11 @@ namespace HHGame.GameScripts
 		private Vector2 LookDir
 		{
 			get => (mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+		}
+
+		private WorldCamera WorldCam
+		{
+			get => WorldCamera.instance;
 		}
 
 		// =========================================================
@@ -71,8 +79,9 @@ namespace HHGame.GameScripts
 
 		private void Start()
 		{
+			WorldCamera.instance.target = transform;
 			body.velocity = Vector2.zero;
-			inputAttack = -1000;
+			inputAttackTimestamp = -1000;
 			cooldown.Stop();
 			StateSwimBegin();
 		}
@@ -87,8 +96,9 @@ namespace HHGame.GameScripts
 			inputAxesClamp = Vector2.ClampMagnitude(inputAxes, 1f);
 			if (Input.GetButtonDown("Fire1"))
 			{
-				inputAttack = Time.time;
+				inputAttackTimestamp = Time.time;
 			}
+			inputAttack = Input.GetButton("Fire1");
 		}
 
 		// =========================================================
@@ -100,35 +110,47 @@ namespace HHGame.GameScripts
 			state = State.Swim;
 
 			swimAccel.SetMin();
+			swimChargeTime.Start();
 		}
 
 		private void StateSwim()
 		{
-			if (inputAxes.sqrMagnitude > 0)
+			if (inputAxes.sqrMagnitude > 0 && !inputAttack)
 				swimAccel.Grow();
 			else
 				swimAccel.Decay();
 
-			Vector2 setpoint = swimVel * inputAxesClamp;
+			Vector2 setpoint = (inputAttack ? swimVelCharge : swimVel) * inputAxesClamp;
 			body.velocity = Vector2.MoveTowards(body.velocity, setpoint, swimAccel.Current * Time.fixedDeltaTime);
 
 			body.MoveRotation(-Vector2.SignedAngle(LookDir, Vector2.up));
 
-			if (Time.time - inputAttack < 0.1f && cooldown.Done)
+			if (swimChargeTime.Done && !inputAttack)
 			{
 				StateAttackBegin();
 			}
+
+			if (inputAttack)
+			{
+				swimChargeTime.Update(Time.fixedDeltaTime);
+			}
+			else
+			{
+				swimChargeTime.Start();
+			}
+
+			WorldCam.IsCharging = inputAttack;
 		}
 
 		private void StateAttackBegin()
 		{
 			state = State.Attack;
 
-			inputAttack = -1000;
 			attackDuration.Start();
 			attackCurInput = Vector2.zero;
 			attackCurDecay = body.velocity;
 			attackDir = LookDir;
+			WorldCam.TriggerFire();
 		}
 
 		private void StateAttack()
