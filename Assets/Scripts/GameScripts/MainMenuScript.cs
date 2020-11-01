@@ -12,7 +12,7 @@ namespace HHGame.GameScripts
 
 		public void Play()
 		{
-			ScreenTransition.BeginTransition(transition.LoadWorld);
+			ScreenTransition.BeginTransition(transition.LoadScene);
 		}
 
 		public void Quit()

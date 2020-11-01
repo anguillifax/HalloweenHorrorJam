@@ -580,6 +580,11 @@ MonoBehaviour:
   attackLumTimer:
     duration: 8
     elapsed: 0
+  diePrefab: {fileID: 4968274880907181168, guid: 54b2fc7a09669584f9dc0e02a0dfbe3c, type: 3}
+  dieTimer:
+    duration: 1
+    elapsed: 0
+  dieAccel: 20
 --- !u!114 &7285257110710366751
 MonoBehaviour:
   m_ObjectHideFlags: 0

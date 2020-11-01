@@ -12,7 +12,7 @@ namespace HHGame.GameScripts
 		public int id = default;
 		public float duration = 1f;
 
-		public IEnumerator LoadWorld(ScreenTransitionTool tool)
+		public IEnumerator LoadScene(ScreenTransitionTool tool)
 		{
 			SimpleTimer timer = new SimpleTimer(duration);
 

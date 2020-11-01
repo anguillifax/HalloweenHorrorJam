@@ -13,12 +13,14 @@ namespace HHGame.GameScripts
 
 		public enum State
 		{
-			Swim, Attack
+			Swim, Attack, Die
 		}
 
 		// =========================================================
 		// Fields
 		// =========================================================
+
+		public static PlayerController instance;
 
 		[Header("Common")]
 		public State state;
@@ -46,6 +48,11 @@ namespace HHGame.GameScripts
 		private Vector2 attackCurDecay;
 		private Vector2 attackCurInput;
 		private Vector2 attackDir;
+
+		[Header("Die")]
+		public GameObject diePrefab = default;
+		public SimpleTimer dieTimer = default;
+		public float dieAccel = 20;
 
 		private Vector2 inputAxes;
 		private Vector2 inputAxesClamp;
@@ -77,11 +84,22 @@ namespace HHGame.GameScripts
 		}
 
 		// =========================================================
+		// Interface
+		// =========================================================
+
+		public void Kill()
+		{
+			state = State.Die;
+		}
+
+		// =========================================================
 		// Setup
 		// =========================================================
 
 		private void Awake()
 		{
+			instance = this;
+
 			body = GetComponent<Rigidbody2D>();
 			spriteRen = GetComponent<SpriteRenderer>();
 			animator = GetComponent<FrameAnimator>();
@@ -199,6 +217,18 @@ namespace HHGame.GameScripts
 			{
 				case State.Swim: StateSwim(); break;
 				case State.Attack: StateAttack(); break;
+				case State.Die:
+					{
+						body.velocity = Vector2.MoveTowards(body.velocity, Vector2.zero, dieAccel * Time.fixedDeltaTime);
+						dieTimer.Update(Time.fixedDeltaTime);
+
+						if (dieTimer.Done)
+						{
+							Instantiate(diePrefab);
+							Destroy(gameObject);
+						}
+					}
+					break;
 			}
 		}
 	}
