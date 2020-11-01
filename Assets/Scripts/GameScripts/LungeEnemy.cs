@@ -30,6 +30,7 @@ namespace HHGame.GameScripts
 		public GameObject visibility = default;
 		public Light2D glow = default;
 		public Vector2 glowRange = new Vector2(0.3f, 1);
+		public GameObject lungeShake = default;
 
 		[Header("Wander")]
 		public float incrementDist = 0.5f;
@@ -91,6 +92,7 @@ namespace HHGame.GameScripts
 				if (!_enraged && value)
 				{
 					source.PlayOneShot(soundEnrage, 0.7f);
+					Instantiate(lungeShake);
 				}
 				_enraged = value;
 				visibility.SetActive(value);

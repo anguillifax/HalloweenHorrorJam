@@ -195,11 +195,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4838903160742048633}
-  - component: {fileID: 4838903160742048635}
   - component: {fileID: 4838903160742048632}
   - component: {fileID: 4838903160742048639}
   - component: {fileID: 670035834}
   - component: {fileID: 3863956474712194157}
+  - component: {fileID: 8995943416694328113}
   m_Layer: 12
   m_Name: Lunger
   m_TagString: Untagged
@@ -223,22 +223,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &4838903160742048635
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4838903160742048636}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!50 &4838903160742048632
 Rigidbody2D:
   serializedVersion: 4
@@ -289,6 +273,7 @@ MonoBehaviour:
   visibility: {fileID: 4838903158763788166}
   glow: {fileID: 0}
   glowRange: {x: 0.3, y: 1}
+  lungeShake: {fileID: 526187730767039801, guid: 498e67024a21388469e6713d5c1948f7, type: 3}
   incrementDist: 0.02
   velocity: 1
   velocityDeg: 150
@@ -538,3 +523,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &8995943416694328113
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4838903160742048636}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.047512412}
+  m_Size: {x: 0.31108475, y: 1.2179751}
+  m_Direction: 0

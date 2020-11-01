@@ -52,6 +52,7 @@ namespace HHGame.GameScripts
 
 		[Header("Die")]
 		public GameObject diePrefab = default;
+		public GameObject dieShake = default;
 		public SimpleTimer dieTimer = default;
 		public float dieAccel = 20;
 
@@ -98,6 +99,7 @@ namespace HHGame.GameScripts
 		{
 			if (state != State.Die)
 			{
+				Instantiate(dieShake);
 				isDead = true;
 				state = State.Die;
 				GlobalSoundSource.Play(soundDie);

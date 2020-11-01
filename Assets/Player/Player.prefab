@@ -837,6 +837,7 @@ MonoBehaviour:
     duration: 8
     elapsed: 0
   diePrefab: {fileID: 4968274880907181168, guid: 54b2fc7a09669584f9dc0e02a0dfbe3c, type: 3}
+  dieShake: {fileID: 8555087851123706489, guid: 21345b37c4c324548beecc5b6a9f4167, type: 3}
   dieTimer:
     duration: 1
     elapsed: 0
