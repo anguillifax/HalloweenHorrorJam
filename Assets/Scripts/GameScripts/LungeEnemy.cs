@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using Random = UnityEngine.Random;
 
 namespace HHGame.GameScripts
@@ -14,7 +15,7 @@ namespace HHGame.GameScripts
 
 		public enum State
 		{
-			Wander, Follow, LungeWait, Lunge, Stun, StayHere, Die, Roar
+			Wander, Follow, LungeWait, Lunge, Stun, StayHere, Die, Roar, Dummy
 		}
 
 		// =========================================================
@@ -27,6 +28,8 @@ namespace HHGame.GameScripts
 		public WanderLoop wander = default;
 		public ScanZone scanner = default;
 		public GameObject visibility = default;
+		public Light2D glow = default;
+		public Vector2 glowRange = new Vector2(0.3f, 1);
 
 		[Header("Wander")]
 		public float incrementDist = 0.5f;
@@ -53,6 +56,7 @@ namespace HHGame.GameScripts
 
 		[Header("Stay Here")]
 		public float stayReagroRange = 8f;
+		public float stayRewakeDelay = 0.8f;
 
 		[Header("Roar")]
 		public SimpleTimer roarTimer = default;
@@ -61,9 +65,19 @@ namespace HHGame.GameScripts
 		public SimpleTimer dieTimer = default;
 		public float dieDecel = 20;
 
+		[Header("Sound")]
+		public AudioClip soundEnrage = default;
+		public AudioClip soundMove = default;
+		public AudioClip soundMove2 = default;
+		public AudioClip soundCharge = default;
+		public AudioClip soundStun = default;
+		public AudioClip soundDie = default;
+
 		private Rigidbody2D body;
 		private FrameAnimator anim;
+		private AudioSource source;
 		private bool _enraged;
+		private bool hasPlayedMoveSound = false;
 
 		// =========================================================
 		// Properties
@@ -74,19 +88,29 @@ namespace HHGame.GameScripts
 			get => _enraged;
 			set
 			{
+				if (!_enraged && value)
+				{
+					source.PlayOneShot(soundEnrage);
+				}
 				_enraged = value;
 				visibility.SetActive(value);
 			}
 		}
 
+		private bool Vulnerable
+		{
+			get => state == State.Lunge || state == State.Stun;
+		}
+
 		// =========================================================
-		// Methods
+		// Setup
 		// =========================================================
 
 		private void Awake()
 		{
 			body = GetComponent<Rigidbody2D>();
 			anim = GetComponent<FrameAnimator>();
+			source = GetComponent<AudioSource>();
 		}
 
 		private void Start()
@@ -97,12 +121,30 @@ namespace HHGame.GameScripts
 			Enraged = false;
 		}
 
+		// =========================================================
+		// Update
+		// =========================================================
+
+		private void Update()
+		{
+			glow.intensity = Vulnerable ? glowRange.y : glowRange.x;
+		}
+
+		// =========================================================
+		// Fixed Update
+		// =========================================================
+
 		private void Wander()
 		{
 			wander.Update();
 
 			if (wander.Current == WanderLoop.Mode.Move)
 			{
+				if (!hasPlayedMoveSound)
+				{
+					source.PlayOneShot(Random.value < 0.5f ? soundMove : soundMove2, 0.2f);
+					hasPlayedMoveSound = true;
+				}
 				if (Vector2.Distance(body.position, trackFollow.CurrentPosition) < incrementDist)
 				{
 					trackFollow.Next();
@@ -112,12 +154,22 @@ namespace HHGame.GameScripts
 				body.MoveRotation(
 					Mathf.MoveTowardsAngle(body.rotation, Vector2.SignedAngle(Vector2.up, trackFollow.CurrentDirection), velocityDeg * Time.fixedDeltaTime));
 			}
+			else
+			{
+				hasPlayedMoveSound = false;
+			}
 
 			scanner.Scan(x => x.CompareTag("Player"), x =>
 			{
 				state = State.Follow;
 				Enraged = true;
 			});
+		}
+
+		private void Reawaken()
+		{
+			Enraged = true;
+			StunBegin();
 		}
 
 		private void StayHere()
@@ -127,7 +179,8 @@ namespace HHGame.GameScripts
 
 			if (PlayerController.instance != null && Vector2.Distance(PlayerController.instance.transform.position, transform.position) < stayReagroRange)
 			{
-				StunBegin();
+				Invoke(nameof(Reawaken), stayRewakeDelay);
+				state = State.Dummy;
 			}
 		}
 
@@ -172,6 +225,7 @@ namespace HHGame.GameScripts
 			{
 				state = State.Lunge;
 				lungeTimer.Start();
+				source.PlayOneShot(soundCharge);
 			}
 			if (PlayerController.instance == null)
 			{
@@ -193,6 +247,7 @@ namespace HHGame.GameScripts
 		{
 			state = State.Stun;
 			stunTimer.Start();
+			source.PlayOneShot(soundStun);
 		}
 
 		private void Stun()
@@ -243,6 +298,7 @@ namespace HHGame.GameScripts
 				if (Enraged)
 				{
 					col.GetComponent<PlayerController>().Kill();
+					Enraged = false;
 				}
 				else
 				{
@@ -255,10 +311,14 @@ namespace HHGame.GameScripts
 
 		void IHitTarget.Hit(bool doesDamage)
 		{
-			if (doesDamage && (state == State.Stun || state == State.Lunge))
+			if (doesDamage && Vulnerable)
 			{
-				state = State.Die;
-				dieTimer.Start();
+				if (state != State.Die)
+				{
+					state = State.Die;
+					dieTimer.Start();
+					source.PlayOneShot(soundDie);
+				}
 			}
 			else
 			{

@@ -54,6 +54,12 @@ namespace HHGame.GameScripts
 		public SimpleTimer dieTimer = default;
 		public float dieAccel = 20;
 
+		[Header("Sound")]
+		public AudioSource soundMove = default;
+		public AudioSource soundCharge = default;
+		public AudioClip soundFire = default;
+		public AudioClip soundDie = default;
+
 		private Vector2 inputAxes;
 		private Vector2 inputAxesClamp;
 		private float inputAttackTimestamp;
@@ -89,7 +95,11 @@ namespace HHGame.GameScripts
 
 		public void Kill()
 		{
-			state = State.Die;
+			if (state != State.Die)
+			{
+				state = State.Die;
+				GlobalSoundSource.Play(soundDie);
+			}
 		}
 
 		// =========================================================
@@ -132,6 +142,11 @@ namespace HHGame.GameScripts
 
 			attackLumTimer.Update(Time.deltaTime);
 			attackLumLight.intensity = attackLumFactor.Evaluate(attackLumTimer.NormalizedProgress);
+
+			if (state == State.Swim && inputAxes.sqrMagnitude > 0 && !soundMove.isPlaying)
+				soundMove.Play();
+
+			soundCharge.volume = Mathf.MoveTowards(soundCharge.volume, inputAttack ? 1 : 0, 3 * Time.fixedDeltaTime);
 		}
 
 		// =========================================================
@@ -186,6 +201,7 @@ namespace HHGame.GameScripts
 			WorldCam.TriggerFire();
 			Instantiate(attackPrefabBlast, attackMuzzleOrigin.position, Quaternion.Euler(0, 0, LookAngleDeg));
 			attackLumTimer.Start();
+			GlobalSoundSource.Play(soundFire);
 		}
 
 		private void StateAttack()
