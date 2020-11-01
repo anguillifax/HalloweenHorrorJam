@@ -7,6 +7,7 @@ namespace HHGame.GameScripts
 	internal class KeyNode : MonoBehaviour
 	{
 		public AudioClip clip = default;
+		public GameObject shake = default;
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
@@ -14,6 +15,7 @@ namespace HHGame.GameScripts
 			{
 				GlobalSoundSource.Play(clip);
 				DoorState.UnlockPiece();
+				Instantiate(shake);
 				Destroy(gameObject);
 			}
 		}

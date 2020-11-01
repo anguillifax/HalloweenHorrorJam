@@ -844,8 +844,8 @@ MonoBehaviour:
   dieAccel: 20
   soundMove: {fileID: 996198858}
   soundCharge: {fileID: 251682100}
-  soundFire: {fileID: 8300000, guid: 1054d190c4da67941af7607f0ce64319, type: 3}
-  soundDie: {fileID: 8300000, guid: f89f34e9b1c5b1648b967c4c8065aaac, type: 3}
+  soundFire: {fileID: 8300000, guid: f89f34e9b1c5b1648b967c4c8065aaac, type: 3}
+  soundDie: {fileID: 8300000, guid: 1649072e307248b4d9bcaed3f6298af8, type: 3}
 --- !u!114 &7285257110710366751
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ namespace HHGame.GameScripts
 		public Sprite[] sprites = default;
 		public LoadSceneTransition transition = default;
 		public AudioClip clip;
+		public GameObject shake = default;
 
 		public static void UnlockPiece()
 		{
@@ -35,6 +36,7 @@ namespace HHGame.GameScripts
 			{
 				GlobalSoundSource.Play(clip);
 				ScreenTransition.BeginTransition(transition.LoadScene);
+				Instantiate(shake);
 				Destroy(this);
 			}
 		}

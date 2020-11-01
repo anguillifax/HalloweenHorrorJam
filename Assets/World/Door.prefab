@@ -108,6 +108,7 @@ MonoBehaviour:
     id: 3
     duration: 1.5
   clip: {fileID: 8300000, guid: 30e764799cde3bf419e729ba46dfc403, type: 3}
+  shake: {fileID: 8555087851123706489, guid: 3d2706eec7368764883a23d2659e6622, type: 3}
 --- !u!61 &5381289553183544423
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -302,8 +302,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.119457565
-      value: 7.450615
+      time: 0.11558183
+      value: 11.919884
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -332,7 +332,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   stunTimer:
-    duration: 3
+    duration: 2
     elapsed: 0
   stayReagroRange: 8
   stayRewakeDelay: 1.3
