@@ -21,6 +21,7 @@ namespace HHGame.GameScripts
 		// =========================================================
 
 		public static PlayerController instance;
+		public static bool isDead;
 
 		[Header("Common")]
 		public State state;
@@ -97,6 +98,7 @@ namespace HHGame.GameScripts
 		{
 			if (state != State.Die)
 			{
+				isDead = true;
 				state = State.Die;
 				GlobalSoundSource.Play(soundDie);
 			}
@@ -109,6 +111,7 @@ namespace HHGame.GameScripts
 		private void Awake()
 		{
 			instance = this;
+			isDead = false;
 
 			body = GetComponent<Rigidbody2D>();
 			spriteRen = GetComponent<SpriteRenderer>();

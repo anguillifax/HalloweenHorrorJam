@@ -90,7 +90,7 @@ namespace HHGame.GameScripts
 			{
 				if (!_enraged && value)
 				{
-					source.PlayOneShot(soundEnrage);
+					source.PlayOneShot(soundEnrage, 0.7f);
 				}
 				_enraged = value;
 				visibility.SetActive(value);
@@ -142,7 +142,7 @@ namespace HHGame.GameScripts
 			{
 				if (!hasPlayedMoveSound)
 				{
-					source.PlayOneShot(Random.value < 0.5f ? soundMove : soundMove2, 0.2f);
+					source.PlayOneShot(Random.value < 0.5f ? soundMove : soundMove2, 0.05f);
 					hasPlayedMoveSound = true;
 				}
 				if (Vector2.Distance(body.position, trackFollow.CurrentPosition) < incrementDist)
@@ -175,9 +175,10 @@ namespace HHGame.GameScripts
 		private void StayHere()
 		{
 			body.velocity = Vector2.zero;
-			scanner.Scan(x => x.CompareTag("Player"), x => state = State.Follow);
 
-			if (PlayerController.instance != null && Vector2.Distance(PlayerController.instance.transform.position, transform.position) < stayReagroRange)
+			if (PlayerController.instance != null
+				&& Vector2.Distance(PlayerController.instance.transform.position, transform.position) < stayReagroRange
+				&& !PlayerController.isDead)
 			{
 				Invoke(nameof(Reawaken), stayRewakeDelay);
 				state = State.Dummy;
@@ -225,7 +226,7 @@ namespace HHGame.GameScripts
 			{
 				state = State.Lunge;
 				lungeTimer.Start();
-				source.PlayOneShot(soundCharge);
+				source.PlayOneShot(soundCharge, 0.8f);
 			}
 			if (PlayerController.instance == null)
 			{
@@ -260,6 +261,7 @@ namespace HHGame.GameScripts
 		{
 			dieTimer.Update(Time.fixedDeltaTime);
 			body.velocity = Vector2.MoveTowards(body.velocity, Vector2.zero, dieDecel * Time.fixedDeltaTime);
+			source.volume = Mathf.MoveTowards(source.volume, 0, 2f * Time.fixedDeltaTime);
 			if (dieTimer.Done)
 			{
 				Destroy(gameObject);
@@ -299,6 +301,7 @@ namespace HHGame.GameScripts
 				{
 					col.GetComponent<PlayerController>().Kill();
 					Enraged = false;
+					state = State.StayHere;
 				}
 				else
 				{
@@ -317,7 +320,6 @@ namespace HHGame.GameScripts
 				{
 					state = State.Die;
 					dieTimer.Start();
-					source.PlayOneShot(soundDie);
 				}
 			}
 			else

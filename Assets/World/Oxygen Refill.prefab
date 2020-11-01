@@ -100,7 +100,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 1.43
 --- !u!114 &2490433738850267870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   found: 0
+  glowRange: {x: 0.2, y: 1}
+  soundTouch: {fileID: 8300000, guid: 02869c31ac59fbe4d919c6e1335b450b, type: 3}
 --- !u!114 &2490433738850267864
 MonoBehaviour:
   m_ObjectHideFlags: 0
