@@ -203,7 +203,7 @@ GameObject:
   m_Layer: 12
   m_Name: Lunger
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -287,6 +287,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1025
   visibility: {fileID: 4838903158763788166}
+  glow: {fileID: 0}
+  glowRange: {x: 0.3, y: 1}
   incrementDist: 0.02
   velocity: 1
   velocityDeg: 150
