@@ -43,6 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c212e3197a00b4195161b7d133e409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 4
+  delay: 2
   playerPrefab: {fileID: 3444375150021619657, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
-  spawnpoint: {x: 0, y: 0}

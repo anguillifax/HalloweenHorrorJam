@@ -10,8 +10,6 @@ namespace HHGame.GameScripts
 		// Fields
 
 		public LineRenderer track = default;
-		public int startId = 0;
-
 		private int curid;
 
 		// Properties
@@ -38,17 +36,17 @@ namespace HHGame.GameScripts
 
 		// Methods
 
-		public void Init()
+		public void Init(Vector2 pos)
 		{
-			for (int i = 0; i < track.positionCount; i++)
+			int closest = 0;
+			for (int i = 1; i < track.positionCount; i++)
 			{
-				curid = i;
-				if (Vector2.Distance(CurrentVertex, NextVertex) == 0)
+				if (Vector2.Distance(track.GetPosition(i), pos) < Vector2.Distance(track.GetPosition(closest), pos))
 				{
-					Debug.LogWarning("Overlapping points", track);
+					closest = i;
 				}
 			}
-			curid = startId;
+			curid = closest;
 			Update();
 		}
 

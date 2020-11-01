@@ -92,7 +92,7 @@ namespace HHGame.GameScripts
 		private void Start()
 		{
 			state = State.Wander;
-			trackFollow.Init();
+			trackFollow.Init(transform.position);
 			body.position = trackFollow.CurrentPosition;
 			Enraged = false;
 		}

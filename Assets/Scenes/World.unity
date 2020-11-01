@@ -132,11 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4838903160742048633, guid: 44fdff6603287bd4bb473b16b9b25f4f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.34
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4838903160742048633, guid: 44fdff6603287bd4bb473b16b9b25f4f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.78
+      value: -7.81
       objectReference: {fileID: 0}
     - target: {fileID: 4838903160742048633, guid: 44fdff6603287bd4bb473b16b9b25f4f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -910,8 +910,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2020937124}
   - component: {fileID: 2020937123}
+  - component: {fileID: 2020937125}
   m_Layer: 0
-  m_Name: Bullet Track
+  m_Name: Lunger Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -924,7 +925,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020937122}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1033,6 +1034,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2020937125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020937122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c9f02faf6108e4dbfe4667af2d232e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2035106904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,11 +1320,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4838903160742048633, guid: 44fdff6603287bd4bb473b16b9b25f4f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.34
+      value: -8.74
       objectReference: {fileID: 0}
     - target: {fileID: 4838903160742048633, guid: 44fdff6603287bd4bb473b16b9b25f4f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.78
+      value: -3.02
       objectReference: {fileID: 0}
     - target: {fileID: 4838903160742048633, guid: 44fdff6603287bd4bb473b16b9b25f4f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1369,6 +1382,18 @@ PrefabInstance:
     - target: {fileID: 3444375150021619657, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3794315706437227746, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3794315706437227746, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5926938
+      objectReference: {fileID: 0}
+    - target: {fileID: 3794315706437227746, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5926938
       objectReference: {fileID: 0}
     - target: {fileID: 3869268907257294600, guid: 2d6ab36bd720df749951a57ad4286a13, type: 3}
       propertyPath: swimChargeTime.duration
