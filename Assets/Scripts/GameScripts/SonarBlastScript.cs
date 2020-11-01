@@ -9,6 +9,7 @@ namespace HHGame.GameScripts
 		public float segmentCount = 11;
 		public float halfSpreadDeg = 30;
 		public GameObject blastPrefab = default;
+		public LayerMask hitMask = default;
 
 		public Collider2D hitArea = default;
 
@@ -19,7 +20,7 @@ namespace HHGame.GameScripts
 			blacklist = new HashSet<IHitTarget>();
 
 			Collider2D[] hits = new Collider2D[32];
-			int hitCount = hitArea.OverlapCollider(default, hits);
+			int hitCount = hitArea.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = hitMask, useTriggers = true }, hits);
 			for (int i = 0; i < hitCount; i++)
 			{
 				IHitTarget hitObj = hits[i].GetComponent<IHitTarget>();

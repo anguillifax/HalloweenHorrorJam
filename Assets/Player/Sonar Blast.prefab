@@ -47,6 +47,9 @@ MonoBehaviour:
   segmentCount: 11
   halfSpreadDeg: 30
   blastPrefab: {fileID: 43407786254531252, guid: 23f4a60458bd0664c955e0affc572ad8, type: 3}
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 4097
   hitArea: {fileID: 4560816338666632096}
 --- !u!60 &4560816338666632096
 PolygonCollider2D:
@@ -73,9 +76,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.33016253, y: 1.6172605}
-      - {x: -1.1520244, y: 1.17031}
+    - - {x: -0.1465047, y: 0.58976924}
+      - {x: -0.44717556, y: 0.4704247}
       - {x: -0.17149362, y: 0.13840574}
       - {x: 0.20020378, y: 0.10969573}
-      - {x: 1.1836779, y: 1.1918248}
-      - {x: 0.41992587, y: 1.6440221}
+      - {x: 0.5185387, y: 0.48201215}
+      - {x: 0.21144925, y: 0.59171236}

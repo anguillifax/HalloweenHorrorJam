@@ -13,7 +13,7 @@ namespace HHGame.GameScripts
 		public void Scan(Predicate<Collider2D> match, Action<Collider2D> action)
 		{
 			Collider2D[] hits = new Collider2D[32];
-			int count = area.OverlapCollider(new ContactFilter2D() { layerMask = mask }, hits);
+			int count = area.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = mask }, hits);
 
 			for (int i = 0; i < count; i++)
 			{
