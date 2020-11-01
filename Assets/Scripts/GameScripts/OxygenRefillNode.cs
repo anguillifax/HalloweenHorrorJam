@@ -18,7 +18,7 @@ namespace HHGame.GameScripts
 					GetComponent<Light2D>().enabled = true;
 					found = true;
 				}
-				OxygenMeter.instance.Refill();
+				//OxygenMeter.instance.Refill();
 				SpawnManager.Position = transform.position;
 			}
 		}

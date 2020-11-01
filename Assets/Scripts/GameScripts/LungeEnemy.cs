@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace HHGame.GameScripts
 {
-	internal class LungeEnemy : MonoBehaviour
+	internal class LungeEnemy : MonoBehaviour, IHitTarget
 	{
 		// =========================================================
 		// Types
@@ -14,7 +14,7 @@ namespace HHGame.GameScripts
 
 		public enum State
 		{
-			Wander, Lunge, Stun, Die
+			Wander, Follow, LungeWait, Lunge, Stun, StayHere, Die
 		}
 
 		// =========================================================
@@ -32,10 +32,30 @@ namespace HHGame.GameScripts
 		public float velocity = 5;
 		public float velocityDeg = 20;
 
+		[Header("Follow")]
+		public float followVel = 5;
+		public float followAccel = 8;
+		public float followRangeTrigger = 4;
+
+		[Header("Lunge Wait")]
+		public SimpleTimer waitTimer;
+		public float waitDecel = 5;
+		public float waitRotateDeg = 30f;
+
 		[Header("Lunge")]
-		public float lungeWait = 0.4f;
+		public SimpleTimer lungeTimer = default;
+		public AnimationCurve lungeVel = default;
+
+		[Header("Stun")]
+		public SimpleTimer stunTimer = default;
+
+		[Header("Die")]
+		public SimpleTimer dieTimer = default;
+		public float dieDecel = 20;
 
 		private Rigidbody2D body;
+		private FrameAnimator anim;
+		private bool enraged;
 
 		// =========================================================
 		// Methods
@@ -44,6 +64,7 @@ namespace HHGame.GameScripts
 		private void Awake()
 		{
 			body = GetComponent<Rigidbody2D>();
+			anim = GetComponent<FrameAnimator>();
 		}
 
 		private void Start()
@@ -51,20 +72,13 @@ namespace HHGame.GameScripts
 			state = State.Wander;
 			trackFollow.Init();
 			body.position = trackFollow.CurrentPosition;
-		}
-
-		private void SearchPlayer()
-		{
-			scanner.Scan(x => x.CompareTag("Player"), x =>
-			{
-				Debug.Log(name + " found player");
-				StartCoroutine(LungeCoroutine());
-			});
+			enraged = false;
 		}
 
 		private void Wander()
 		{
 			wander.Update();
+
 			if (wander.Current == WanderLoop.Mode.Move)
 			{
 				if (Vector2.Distance(body.position, trackFollow.CurrentPosition) < incrementDist)
@@ -76,14 +90,84 @@ namespace HHGame.GameScripts
 				body.MoveRotation(
 					Mathf.MoveTowardsAngle(body.rotation, Vector2.SignedAngle(Vector2.up, trackFollow.CurrentDirection), velocityDeg * Time.fixedDeltaTime));
 			}
-			SearchPlayer();
-		}
-		
-		private IEnumerator LungeCoroutine()
-		{
-			//state = State.Lunge;
 
-			yield return new WaitForSeconds(lungeWait);
+			if (enraged)
+			{
+				scanner.Scan(x => x.CompareTag("Player"), x => state = State.Follow);
+			}
+		}
+
+		private void StayHere()
+		{
+			body.velocity = Vector2.zero;
+			scanner.Scan(x => x.CompareTag("Player"), x => state = State.Follow);
+		}
+
+		private void Follow()
+		{
+			if (PlayerController.instance != null)
+			{
+				Vector2 target = PlayerController.instance.transform.position;
+				Vector2 setpoint = followVel * (target - body.position).normalized;
+				body.velocity = Vector2.MoveTowards(body.velocity, setpoint, followAccel * Time.fixedDeltaTime);
+				if (Vector2.Distance(target, body.position) < followRangeTrigger)
+				{
+					state = State.LungeWait;
+					waitTimer.Start();
+				}
+			}
+			else
+			{
+				state = State.Wander;
+			}
+		}
+
+		private void LungeWait()
+		{
+			waitTimer.Update(Time.fixedDeltaTime);
+			body.velocity = Vector2.MoveTowards(body.velocity, Vector2.zero, waitDecel * Time.fixedDeltaTime);
+			float angDeg = body.rotation;
+			if (PlayerController.instance != null)
+			{
+				angDeg = -Vector2.SignedAngle((PlayerController.instance.transform.position - transform.position).normalized, Vector2.up);
+			}
+			body.MoveRotation(Mathf.MoveTowardsAngle(body.rotation, angDeg, waitRotateDeg * Time.fixedDeltaTime));
+			if (waitTimer.Done && Mathf.Approximately(body.rotation, angDeg))
+			{
+				state = State.Lunge;
+				lungeTimer.Start();
+			}
+			if (PlayerController.instance == null)
+			{
+				state = State.StayHere;
+			}
+		}
+
+		private void Lunge()
+		{
+			lungeTimer.Update(Time.fixedDeltaTime);
+			body.velocity = transform.up * lungeVel.Evaluate(lungeTimer.NormalizedProgress);
+			if (lungeTimer.Done)
+			{
+				state = State.Stun;
+				stunTimer.Start();
+			}
+		}
+
+		private void Stun()
+		{
+			stunTimer.Update(Time.fixedDeltaTime);
+			state = PlayerController.instance != null ? State.Follow : State.StayHere;
+		}
+
+		private void Die()
+		{
+			dieTimer.Update(Time.fixedDeltaTime);
+			body.velocity = Vector2.MoveTowards(body.velocity, Vector2.zero, dieDecel * Time.fixedDeltaTime);
+			if (dieTimer.Done)
+			{
+				Destroy(gameObject);
+			}
 		}
 
 		private void FixedUpdate()
@@ -91,11 +175,33 @@ namespace HHGame.GameScripts
 			switch (state)
 			{
 				case State.Wander: Wander(); break;
-				case State.Lunge: break;
-				case State.Stun:
-					break;
-				case State.Die:
-					break;
+				case State.Follow: Follow(); break;
+				case State.LungeWait: LungeWait(); break;
+				case State.Lunge: Lunge(); break;
+				case State.Stun: Stun(); break;
+				case State.StayHere: StayHere(); break;
+				case State.Die: Die(); break;
+			}
+		}
+
+		private void OnTriggerEnter2D(Collider2D col)
+		{
+			if (col.CompareTag("Player"))
+			{
+				col.GetComponent<PlayerController>().Kill();
+			}
+		}
+
+		void IHitTarget.Hit(bool doesDamage)
+		{
+			if (doesDamage)
+			{
+				state = State.Die;
+				dieTimer.Start();
+			}
+			else
+			{
+				enraged = true;
 			}
 		}
 	}
