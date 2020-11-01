@@ -37,7 +37,6 @@ namespace HHGame.GameScripts
 				yield return null;
 			}
 			tool.Progress = 0;
-			Debug.Log("Finish transition");
 		}
 	}
 }

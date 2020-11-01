@@ -13,11 +13,13 @@ namespace HHGame.GameScripts
 		public void Play()
 		{
 			ScreenTransition.BeginTransition(transition.LoadScene);
+			Destroy(this);
 		}
 
 		public void Quit()
 		{
 			Application.Quit();
+			Destroy(this);
 		}
 	}
 }

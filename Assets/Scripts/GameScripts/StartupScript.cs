@@ -15,6 +15,7 @@ namespace HHGame.GameScripts
 		private IEnumerator TransitionCoroutine(ScreenTransitionTool tool)
 		{
 			tool.Progress = 1f;
+			tool.ScreenPosition = new Vector2(0, Screen.height);
 			tool.TransitionType = type;
 
 			var scene = SceneManager.LoadSceneAsync(1);

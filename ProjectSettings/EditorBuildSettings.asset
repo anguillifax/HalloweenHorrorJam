@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: 2d812cd0c9180b04ab8c28ac53eda846
+  - enabled: 1
+    path: Assets/Scenes/Voiceover.unity
+    guid: 0832a823dcaf5f7409ec8b3d4deee0cc
+  - enabled: 1
+    path: Assets/Scenes/Help.unity
+    guid: b2ababe79657c3b48b73f37a0c5456cf
   m_configObjects: {}
