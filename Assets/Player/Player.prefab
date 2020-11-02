@@ -494,7 +494,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537830578}
-  m_LocalRotation: {x: -0, y: -0, z: -0.08761309, w: 0.9961546}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -680,7 +680,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5926938, y: 0.5926938}
+  m_Size: {x: 0.7507515, y: 0.7507515}
   m_Direction: 0
 --- !u!50 &7545860465054279512
 Rigidbody2D:
@@ -843,7 +843,9 @@ MonoBehaviour:
     duration: 1
     elapsed: 0
   dieAccel: 20
-  soundMove: {fileID: 996198858}
+  soundMoveSrc: {fileID: 996198858}
+  soundMove: {fileID: 8300000, guid: e4ec54751728ffd4ab9c0dbb11d18302, type: 3}
+  soundMove2: {fileID: 8300000, guid: c03196feb17554540826f61a442d8fb7, type: 3}
   soundCharge: {fileID: 251682100}
   soundFire: {fileID: 8300000, guid: f89f34e9b1c5b1648b967c4c8065aaac, type: 3}
   soundDie: {fileID: 8300000, guid: 1649072e307248b4d9bcaed3f6298af8, type: 3}

@@ -24,6 +24,7 @@ namespace HHGame.GameScripts
 
 		[Header("Common")]
 		public State state;
+		public bool fake = false;
 		public TrackFollower trackFollow = default;
 		public WanderLoop wander = default;
 		public ScanZone scanner = default;
@@ -290,7 +291,7 @@ namespace HHGame.GameScripts
 
 		private void FixedUpdate()
 		{
-			if (PlayerController.isDead)
+			if (PlayerController.isDead && state != State.Wander)
 			{
 				state = State.StayHere;
 				Enraged = false;
@@ -308,15 +309,32 @@ namespace HHGame.GameScripts
 			}
 		}
 
+		private void KillLunger()
+		{
+			state = State.Die;
+			GlobalSoundSource.Play(soundDie);
+			dieTimer.Start();
+		}
+
 		private void OnTriggerEnter2D(Collider2D col)
 		{
 			if (col.CompareTag("Player"))
 			{
 				if (Enraged)
 				{
-					col.GetComponent<PlayerController>().Kill();
-					Enraged = false;
-					state = State.StayHere;
+					if (fake)
+					{
+						if (state != State.Die)
+						{
+							KillLunger();
+						}
+					}
+					else
+					{
+						col.GetComponent<PlayerController>().Kill();
+						Enraged = false;
+						state = State.StayHere;
+					}
 				}
 				else
 				{
@@ -333,9 +351,7 @@ namespace HHGame.GameScripts
 			{
 				if (state != State.Die)
 				{
-					state = State.Die;
-					GlobalSoundSource.Play(soundDie);
-					dieTimer.Start();
+					KillLunger();
 				}
 			}
 			else

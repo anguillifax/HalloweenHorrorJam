@@ -57,7 +57,9 @@ namespace HHGame.GameScripts
 		public float dieAccel = 20;
 
 		[Header("Sound")]
-		public AudioSource soundMove = default;
+		public AudioSource soundMoveSrc = default;
+		public AudioClip soundMove = default;
+		public AudioClip soundMove2 = default;
 		public AudioSource soundCharge = default;
 		public AudioClip soundFire = default;
 		public AudioClip soundDie = default;
@@ -151,8 +153,11 @@ namespace HHGame.GameScripts
 			attackLumTimer.Update(Time.deltaTime);
 			attackLumLight.intensity = attackLumFactor.Evaluate(attackLumTimer.NormalizedProgress);
 
-			if (state == State.Swim && inputAxes.sqrMagnitude > 0 && !soundMove.isPlaying)
-				soundMove.Play();
+			if (state == State.Swim && inputAxes.sqrMagnitude > 0 && !soundMoveSrc.isPlaying)
+			{
+				soundMoveSrc.clip = UnityEngine.Random.value < 0.5f ? soundMove : soundMove2;
+				soundMoveSrc.Play();
+			}
 
 			soundCharge.volume = Mathf.MoveTowards(soundCharge.volume, inputAttack ? soundChargeVolume : 0, 2 * Time.fixedDeltaTime);
 		}
@@ -245,6 +250,7 @@ namespace HHGame.GameScripts
 					{
 						body.velocity = Vector2.MoveTowards(body.velocity, Vector2.zero, dieAccel * Time.fixedDeltaTime);
 						dieTimer.Update(Time.fixedDeltaTime);
+						body.constraints = RigidbodyConstraints2D.FreezeRotation;
 
 						if (dieTimer.Done)
 						{
