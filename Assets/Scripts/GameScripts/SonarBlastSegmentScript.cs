@@ -17,6 +17,7 @@ namespace HHGame.GameScripts
 		public SimpleTimer trailDelay = default;
 		public GameObject trailPrefab = default;
 		public GameObject trailBgPrefab = default;
+		public GameObject bubbleParticles = default;
 		public float hitLifetimeDecay = 0.3f;
 
 		private Rigidbody2D body;
@@ -26,6 +27,7 @@ namespace HHGame.GameScripts
 		{
 			body = GetComponent<Rigidbody2D>();
 			glow = GetComponent<Light2D>();
+			Instantiate(bubbleParticles, transform.position, Quaternion.identity).GetComponent<BubbleSystemFollow>().parent = transform;
 		}
 
 		private void Start()

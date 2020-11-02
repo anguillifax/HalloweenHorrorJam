@@ -12,6 +12,7 @@ namespace HHGame.GameScripts
 		private void Spawn()
 		{
 			Instantiate(playerPrefab, SpawnManager.Position, Quaternion.identity);
+			Destroy(gameObject);
 		}
 
 		private void Start()

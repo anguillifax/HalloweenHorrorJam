@@ -173,6 +173,7 @@ MonoBehaviour:
     elapsed: 0
   trailPrefab: {fileID: 7366798589402282679, guid: b08ed1436927d8746a6c093c0d0c026d, type: 3}
   trailBgPrefab: {fileID: 7366798589402282679, guid: 6e8d75159e0a50b4299248635843f556, type: 3}
+  bubbleParticles: {fileID: 5590304831934431185, guid: af98b4cd576939b4eb4a2e47e545a94f, type: 3}
   hitLifetimeDecay: 1.5
 --- !u!114 &3638418084877896284
 MonoBehaviour:
