@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99994030073d7bb4983606da1f1fdffc, type: 3}
+  m_Name: LungerDie
+  m_EditorClassIdentifier: 
+  framerate: 4
+  loop: 0
+  frames:
+  - {fileID: 21300000, guid: c3c85a9261ca8384ab19c046586494a2, type: 3}
+  - {fileID: 21300000, guid: e0e3a347249ed394483ebef835f69a24, type: 3}

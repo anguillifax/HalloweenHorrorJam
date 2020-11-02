@@ -61,6 +61,8 @@ namespace HHGame.GameScripts
 		public AudioSource soundCharge = default;
 		public AudioClip soundFire = default;
 		public AudioClip soundDie = default;
+		public AudioClip soundSpawn = default;
+		public float soundChargeVolume = 0.6f;
 
 		private Vector2 inputAxes;
 		private Vector2 inputAxesClamp;
@@ -129,6 +131,7 @@ namespace HHGame.GameScripts
 			cooldown.Stop();
 			attackLumTimer.Stop();
 			StateSwimBegin();
+			GlobalSoundSource.Play(soundSpawn);
 		}
 
 		// =========================================================
@@ -151,7 +154,7 @@ namespace HHGame.GameScripts
 			if (state == State.Swim && inputAxes.sqrMagnitude > 0 && !soundMove.isPlaying)
 				soundMove.Play();
 
-			soundCharge.volume = Mathf.MoveTowards(soundCharge.volume, inputAttack ? 1 : 0, 3 * Time.fixedDeltaTime);
+			soundCharge.volume = Mathf.MoveTowards(soundCharge.volume, inputAttack ? soundChargeVolume : 0, 2 * Time.fixedDeltaTime);
 		}
 
 		// =========================================================

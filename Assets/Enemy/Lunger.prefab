@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 4838903158763788161}
   - component: {fileID: 4838903158763788163}
   - component: {fileID: 4838903158763788160}
+  - component: {fileID: 6121032051102363231}
   m_Layer: 12
   m_Name: Sprites
   m_TagString: Untagged
@@ -186,6 +187,24 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &6121032051102363231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4838903158763788166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 202c83d737e8041448c0f09612aa3f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  queue: []
+  timescale: 1
+  frame: 0
+  DefaultClip: {fileID: 11400000, guid: fcb00b5b18ed5454da4328e3ece06a0d, type: 2}
+  useUnscaledTime: 0
+  animationDirectory: 
 --- !u!1 &4838903160742048636
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,7 +290,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1025
   visibility: {fileID: 4838903158763788166}
-  glow: {fileID: 0}
+  glow: {fileID: 4838903158763788160}
   glowRange: {x: 0.3, y: 1}
   lungeShake: {fileID: 526187730767039801, guid: 498e67024a21388469e6713d5c1948f7, type: 3}
   incrementDist: 0.02
@@ -339,6 +358,8 @@ MonoBehaviour:
   roarTimer:
     duration: 2
     elapsed: 0
+  diePrefab: {fileID: 3882351681240407589, guid: e92ef288b4c018549be3e0e866b275a5, type: 3}
+  diePrefabLifetime: 0.5
   dieTimer:
     duration: 0.5
     elapsed: 0

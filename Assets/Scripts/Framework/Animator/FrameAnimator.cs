@@ -97,12 +97,12 @@ namespace HHGame
 		{
 			base.Awake();
 
-			if (string.IsNullOrWhiteSpace(animationDirectory))
-			{
-				Debug.LogError("Frame animator had no animation directory set.");
-				enabled = false;
-				return;
-			}
+			//if (string.IsNullOrWhiteSpace(animationDirectory))
+			//{
+			//	Debug.LogError("Frame animator had no animation directory set.");
+			//	enabled = false;
+			//	return;
+			//}
 
 			if (clipBank == null)
 			{

@@ -63,6 +63,8 @@ namespace HHGame.GameScripts
 		public SimpleTimer roarTimer = default;
 
 		[Header("Die")]
+		public GameObject diePrefab = default;
+		public float diePrefabLifetime = 2f;
 		public SimpleTimer dieTimer = default;
 		public float dieDecel = 20;
 
@@ -84,6 +86,11 @@ namespace HHGame.GameScripts
 		// Properties
 		// =========================================================
 
+		private void PlayEnrage()
+		{
+			source.PlayOneShot(soundEnrage, 0.7f);
+		}
+
 		public bool Enraged
 		{
 			get => _enraged;
@@ -91,7 +98,7 @@ namespace HHGame.GameScripts
 			{
 				if (!_enraged && value)
 				{
-					source.PlayOneShot(soundEnrage, 0.7f);
+					Invoke(nameof(PlayEnrage), Random.Range(0, 0.2f));
 					Instantiate(lungeShake);
 				}
 				_enraged = value;
@@ -267,6 +274,7 @@ namespace HHGame.GameScripts
 			if (dieTimer.Done)
 			{
 				Destroy(gameObject);
+				Destroy(Instantiate(diePrefab, transform.position, transform.rotation), diePrefabLifetime);
 				visibility.SetActive(false);
 			}
 		}
@@ -282,6 +290,11 @@ namespace HHGame.GameScripts
 
 		private void FixedUpdate()
 		{
+			if (PlayerController.isDead)
+			{
+				state = State.StayHere;
+				Enraged = false;
+			}
 			switch (state)
 			{
 				case State.Wander: Wander(); break;
@@ -321,6 +334,7 @@ namespace HHGame.GameScripts
 				if (state != State.Die)
 				{
 					state = State.Die;
+					GlobalSoundSource.Play(soundDie);
 					dieTimer.Start();
 				}
 			}
