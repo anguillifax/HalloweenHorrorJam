@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  fake: 0
   trackFollow:
     track: {fileID: 0}
   wander:
@@ -321,8 +322,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.11558183
-      value: 11.919884
+      time: 0.14011797
+      value: 8.541153
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -330,8 +331,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.65059394
-      value: 3.7626047
+      time: 0.6088459
+      value: 2.6992502
       inSlope: 0
       outSlope: 0
       tangentMode: 0

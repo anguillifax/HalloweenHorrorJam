@@ -735,7 +735,7 @@ MonoBehaviour:
   attackDuration:
     duration: 1
     elapsed: 0
-  attackHit: 0.1
+  attackHit: 0
   attackCurve:
     serializedVersion: 2
     m_Curve:
